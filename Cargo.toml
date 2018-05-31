@@ -1,0 +1,28 @@
+[package]
+name = "atsam4lc8c-hal"
+description = "Peripheral access API for Atmel ATSAM4LC8C microcontrollers"
+version = "0.1.0"
+authors = ["Joost Yervante Damad <joost@damad.be>"]
+keywords = ["no-std", "arm", "cortex-m", "atsam"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/rustit-be/atsam4lc8c-hal"
+documentation = "https://docs.rs/atsam4lc8c-hal"
+categories = ["embedded", "hardware-support"]
+
+[dependencies]
+atsam4lc8c = "0.1"
+cortex-m = "0.5.0"
+nb = "0.1.1"
+cortex-m-rt = "0.5.1"
+panic-semihosting = "0.2.0"
+embedded-hal = "0.2.0"
+
+[dev-dependencies]
+cortex-m-semihosting = "0.2.0"
+
+[dev-dependencies.atsam4lc8c]
+features = ["rt"]
+version = "0.1.0"
+
+[features]
+rt = ["atsam4lc8c/rt"]
