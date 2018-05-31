@@ -18,6 +18,8 @@ pub enum PS {
     PS2,
 }
 
+pub use self::PS::*;
+
 impl Into<u8> for PS {
     fn into(self) -> u8 {
         match self {
