@@ -8,7 +8,7 @@ pub fn init(p:&Peripherals) {
 
     // inspiration from atsamd21-rs, tock and ASF
 
-    bpm::set_power_scaling(p, 2);
+    bpm::set_power_scaling(p, bpm::PS::PS2);
     
     bscif::enable_rc32k(p);
 
@@ -18,5 +18,5 @@ pub fn init(p:&Peripherals) {
 
 }
 
-mod bpm;
-mod bscif;
+pub mod bpm;
+pub mod bscif;

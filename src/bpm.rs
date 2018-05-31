@@ -12,10 +12,26 @@ fn unlock_register(p:&Peripherals, register_offset: u16) {
     });
 }
 
-pub fn set_power_scaling(p:&Peripherals, mode:u8) {
+pub enum PS {
+    PS0,
+    PS1,
+    PS2,
+}
+
+impl Into<u8> for PS {
+    fn into(self) -> u8 {
+        match self {
+            PS::PS0 => 0,
+            PS::PS1 => 1,
+            PS::PS2 => 2,
+        }
+    }
+}
+
+pub fn set_power_scaling(p:&Peripherals, mode:PS) {
     unlock_register(p, 0x1c);
     p.BPM.pmcon.modify(|_,w| unsafe {
-        w.ps().bits(mode); // PS mode
+        w.ps().bits(mode.into()); // PS mode
         w.pscreq().set_bit(); // Power Scaling Requested
         w.pscm().set_bit() // Without CPU Halt
     });
