@@ -15,7 +15,6 @@ pub fn init(p:&Peripherals) {
     hcache::enable_cache(p);
 
     hflashc::enable_high_speed_flash(p);
-    // flashcalw::FLASH_CONTROLLER.enable_high_speed_flash();
 
 }
 
