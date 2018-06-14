@@ -13,14 +13,18 @@ pub fn init(p:&Peripherals) {
     bscif::enable_rc32k(p);
 
     hcache::enable_cache(p);
-    // flashcalw::FLASH_CONTROLLER.enable_cache();
 
     hflashc::enable_high_speed_flash(p);
     // flashcalw::FLASH_CONTROLLER.enable_high_speed_flash();
 
 }
 
-pub mod hcache;
-pub mod hflashc;
+trait RegisterOffset {
+    fn offset(&self) -> u16;
+}
+
 pub mod bpm;
 pub mod bscif;
+pub mod hcache;
+pub mod hflashc;
+pub mod pm;

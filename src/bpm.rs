@@ -23,19 +23,25 @@ pub use self::PS::*;
 impl Into<u8> for PS {
     fn into(self) -> u8 {
         match self {
-            PS::PS0 => 0,
-            PS::PS1 => 1,
-            PS::PS2 => 2,
+            PS0 => 0,
+            PS1 => 1,
+            PS2 => 2,
         }
     }
 }
 
 pub fn set_power_scaling(p:&Peripherals, mode:PS) {
     unlock_register(p, 0x1c);
+    
     p.BPM.pmcon.modify(|_,w| unsafe {
-        w.ps().bits(mode.into()); // PS mode
-        w.pscreq().set_bit(); // Power Scaling Requested
-        w.pscm().set_bit() // Without CPU Halt
+        // PS mode `mode`
+        w.ps().bits(mode.into());
+        // Power Scaling Requested
+        w.pscreq().set_bit();
+        // Without CPU Halt
+        w.pscm().set_bit()
     });
+    
+    // wait for PS ok bit
     while !p.BPM.sr.read().psok().bit() {}
 }

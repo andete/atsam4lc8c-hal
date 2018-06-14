@@ -3,4 +3,5 @@
 use Peripherals;
 
 pub fn enable_high_speed_flash(p:&Peripherals) {
+    // TODO
 }
